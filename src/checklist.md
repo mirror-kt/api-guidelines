@@ -2,75 +2,75 @@
 
 <!-- Read CONTRIBUTING.md before writing new guidelines -->
 
-- **Naming** *(crate aligns with Rust naming conventions)*
-  - [ ] Casing conforms to RFC 430 ([C-CASE])
-  - [ ] Ad-hoc conversions follow `as_`, `to_`, `into_` conventions ([C-CONV])
-  - [ ] Getter names follow Rust convention ([C-GETTER])
-  - [ ] Methods on collections that produce iterators follow `iter`, `iter_mut`, `into_iter` ([C-ITER])
-  - [ ] Iterator type names match the methods that produce them ([C-ITER-TY])
-  - [ ] Feature names are free of placeholder words ([C-FEATURE])
-  - [ ] Names use a consistent word order ([C-WORD-ORDER])
-- **Interoperability** *(crate interacts nicely with other library functionality)*
-  - [ ] Types eagerly implement common traits ([C-COMMON-TRAITS])
+- **命名** *(クレートがRustの慣用的な命名規則に従っている)*
+  - [ ] 大文字・小文字の使い分けがRFC430に従っている ([C-CASE])
+  - [ ] 変換メソッドに`as_`, `to_`, `into_`を使っている ([C-CONV])
+  - [ ] Getterの名前がRustの規則に従っている ([C-GETTER])
+  - [ ] イテレータを生成するメソッドの名前が`iter`, `iter_mut`, `into_iter`となっている ([C-ITER])
+  - [ ] イテレータの型名が、それを生成するメソッドと揃っている ([C-ITER-TY])
+  - [ ] Featureの名前に余計な単語が入っていない ([C-FEATURE])
+  - [ ] 命名時に単語を並べる順番が揃っている ([C-WORD-ORDER])
+- **相互運用性** *(クレートが他のクレートの機能とうまく連携できる)*
+  - [ ] 積極的に一般的なトレイトを型に実装している ([C-COMMON-TRAITS])
     - `Copy`, `Clone`, `Eq`, `PartialEq`, `Ord`, `PartialOrd`, `Hash`, `Debug`,
       `Display`, `Default`
-  - [ ] Conversions use the standard traits `From`, `AsRef`, `AsMut` ([C-CONV-TRAITS])
-  - [ ] Collections implement `FromIterator` and `Extend` ([C-COLLECT])
-  - [ ] Data structures implement Serde's `Serialize`, `Deserialize` ([C-SERDE])
-  - [ ] Types are `Send` and `Sync` where possible ([C-SEND-SYNC])
-  - [ ] Error types are meaningful and well-behaved ([C-GOOD-ERR])
-  - [ ] Binary number types provide `Hex`, `Octal`, `Binary` formatting ([C-NUM-FMT])
-  - [ ] Generic reader/writer functions take `R: Read` and `W: Write` by value ([C-RW-VALUE])
-- **Macros** *(crate presents well-behaved macros)*
-  - [ ] Input syntax is evocative of the output ([C-EVOCATIVE])
-  - [ ] Macros compose well with attributes ([C-MACRO-ATTR])
-  - [ ] Item macros work anywhere that items are allowed ([C-ANYWHERE])
-  - [ ] Item macros support visibility specifiers ([C-MACRO-VIS])
-  - [ ] Type fragments are flexible ([C-MACRO-TY])
-- **Documentation** *(crate is abundantly documented)*
-  - [ ] Crate level docs are thorough and include examples ([C-CRATE-DOC])
-  - [ ] All items have a rustdoc example ([C-EXAMPLE])
-  - [ ] Examples use `?`, not `try!`, not `unwrap` ([C-QUESTION-MARK])
-  - [ ] Function docs include error, panic, and safety considerations ([C-FAILURE])
-  - [ ] Prose contains hyperlinks to relevant things ([C-LINK])
-  - [ ] Cargo.toml includes all common metadata ([C-METADATA])
+  - [ ] 変換に標準のトレイト`From`, `AsRef`, `AsMut`を用いている ([C-CONV-TRAITS])
+  - [ ] コレクションが`FromIterator`と`Extend`を実装している ([C-COLLECT])
+  - [ ] データ構造がSerdeの`Serialize`と`Deserialize`を実装している ([C-SERDE])
+  - [ ] 型が可能な限り`Send`,`Sync`である ([C-SEND-SYNC])
+  - [ ] エラー型の意味が分かりやすく、行儀の良い実装となっている ([C-GOOD-ERR])
+  - [ ] バイナリ数値型が`Hex`, `Octal`, `Binary`によるフォーマットをサポートしている ([C-NUM-FMT])
+  - [ ] 読み書きを行うジェネリックな関数が`R: Read`と`W: Write`を値渡しで受け取っている ([C-RW-VALUE])
+- **マクロ** *(クレートが行儀のよいマクロを提供している)*
+  - [ ] 入力の構文から結果をイメージできるようになっている ([C-EVOCATIVE])
+  - [ ] アイテムを宣言するマクロが属性と衝突しない ([C-MACRO-ATTR])
+  - [ ] アイテムを宣言するマクロがアイテムを宣言できる場所のどこでも使える ([C-ANYWHERE])
+  - [ ] アイテムを宣言するマクロが可視性の指定をサポートしている ([C-MACRO-VIS])
+  - [ ] 型の指定が柔軟である ([C-MACRO-TY])
+- **ドキュメンテーション** *(クレートに十分なドキュメントが付けられている)*
+  - [ ] クレートレベルにコード例付きの詳細なドキュメントがある ([C-CRATE-DOC])
+  - [ ] 全てのアイテムにコード例が付いている ([C-EXAMPLE])
+  - [ ] コード例が`try!`や`unwrap`ではなく`?`を使っている ([C-QUESTION-MARK])
+  - [ ] 関数のドキュメントにエラー、パニック、安全性に関する事項が含まれている ([C-FAILURE])
+  - [ ] 文章に関係する項目へのリンクを含める ([C-LINK])
+  - [ ] Cargo.tomlが一般的なメタデータを全て含んでいる ([C-METADATA])
     - authors, description, license, homepage, documentation, repository,
-      keywords, categories
-  - [ ] Release notes document all significant changes ([C-RELNOTES])
-  - [ ] Rustdoc does not show unhelpful implementation details ([C-HIDDEN])
-- **Predictability** *(crate enables legible code that acts how it looks)*
-  - [ ] Smart pointers do not add inherent methods ([C-SMART-PTR])
-  - [ ] Conversions live on the most specific type involved ([C-CONV-SPECIFIC])
-  - [ ] Functions with a clear receiver are methods ([C-METHOD])
-  - [ ] Functions do not take out-parameters ([C-NO-OUT])
-  - [ ] Operator overloads are unsurprising ([C-OVERLOAD])
-  - [ ] Only smart pointers implement `Deref` and `DerefMut` ([C-DEREF])
-  - [ ] Constructors are static, inherent methods ([C-CTOR])
-- **Flexibility** *(crate supports diverse real-world use cases)*
-  - [ ] Functions expose intermediate results to avoid duplicate work ([C-INTERMEDIATE])
-  - [ ] Caller decides where to copy and place data ([C-CALLER-CONTROL])
-  - [ ] Functions minimize assumptions about parameters by using generics ([C-GENERIC])
-  - [ ] Traits are object-safe if they may be useful as a trait object ([C-OBJECT])
-- **Type safety** *(crate leverages the type system effectively)*
-  - [ ] Newtypes provide static distinctions ([C-NEWTYPE])
-  - [ ] Arguments convey meaning through types, not `bool` or `Option` ([C-CUSTOM-TYPE])
-  - [ ] Types for a set of flags are `bitflags`, not enums ([C-BITFLAG])
-  - [ ] Builders enable construction of complex values ([C-BUILDER])
-- **Dependability** *(crate is unlikely to do the wrong thing)*
-  - [ ] Functions validate their arguments ([C-VALIDATE])
-  - [ ] Destructors never fail ([C-DTOR-FAIL])
-  - [ ] Destructors that may block have alternatives ([C-DTOR-BLOCK])
-- **Debuggability** *(crate is conducive to easy debugging)*
-  - [ ] All public types implement `Debug` ([C-DEBUG])
-  - [ ] `Debug` representation is never empty ([C-DEBUG-NONEMPTY])
-- **Future proofing** *(crate is free to improve without breaking users' code)*
-  - [ ] Sealed traits protect against downstream implementations ([C-SEALED])
-  - [ ] Structs have private fields ([C-STRUCT-PRIVATE])
-  - [ ] Newtypes encapsulate implementation details ([C-NEWTYPE-HIDE])
-  - [ ] Data structures do not duplicate derived trait bounds ([C-STRUCT-BOUNDS])
-- **Necessities** *(to whom they matter, they really matter)*
-  - [ ] Public dependencies of a stable crate are stable ([C-STABLE])
-  - [ ] Crate and its dependencies have a permissive license ([C-PERMISSIVE])
+      readme, keywords, categories
+  - [ ] 大きな変更が全てリリースノートに記載されている ([C-RELNOTES])
+  - [ ] 無用な実装詳細がRustdocに表示されていない ([C-HIDDEN])
+- **予測性** *(クレートを使い、見かけ通りに動作する読みやすいコードが書ける)*
+  - [ ] スマートポインタがinherentメソッドを持っていない ([C-SMART-PTR])
+  - [ ] 変換メソッドは最も関係の深い型に付ける ([C-CONV-SPECIFIC])
+  - [ ] 明確なレシーバを持つ関数はメソッドにする ([C-METHOD])
+  - [ ] 関数がoutパラメータを持たない ([C-NO-OUT])
+  - [ ] 奇妙な演算子オーバーロードを行っていない ([C-OVERLOAD])
+  - [ ] `Deref`と`DerefMut`を実装しているのはスマートポインタだけである ([C-DEREF])
+  - [ ] コンストラクタはスタティックなinherentメソッドである ([C-CTOR])
+- **柔軟性** *(クレートが実用的なユースケースを幅広くカバーしている)*
+  - [ ] 重複した処理を行わなくて済むように中間生成物を公開している ([C-INTERMEDIATE])
+  - [ ] 呼び出し側がデータをコピーするタイミングを決める ([C-CALLER-CONTROL])
+  - [ ] ジェネリクスを用いて関数の引数に対する制限を最小にしている ([C-GENERIC])
+  - [ ] トレイトオブジェクトとして有用なトレイトはオブジェクトセーフになっている ([C-OBJECT])
+- **型安全性** *(クレートが型システムを有効に活用している)*
+  - [ ] newtypeを使って静的に値を区別する ([C-NEWTYPE])
+  - [ ] `bool`や`Option`の代わりに意味のある型を使う ([C-CUSTOM-TYPE])
+  - [ ] フラグの集合は、列挙型ではなく`bitflags`で表す ([C-BITFLAG])
+  - [ ] 複雑な値の生成にはビルダーパターンを使う ([C-BUILDER])
+- **信頼性** *(クレートが間違ったことをしない)*
+  - [ ] 関数が引数を検証している ([C-VALIDATE])
+  - [ ] デストラクタが失敗しない ([C-DTOR-FAIL])
+  - [ ] ブロックする可能性のあるデストラクタには代替手段を用意する ([C-DTOR-BLOCK])
+- **デバッガビリティ** *(クレートが容易なデバッグを支援している)*
+  - [ ] 全てのパブリックな型に`Debug`を実装する ([C-DEBUG])
+  - [ ] `Debug`表現を空にしない ([C-DEBUG-NONEMPTY])
+- **将来性** *(クレートを、ユーザのコードを壊すことなく改善できる)*
+  - [ ] sealedトレイトを使って下流の実装を適切に防いでいる ([C-SEALED])
+  - [ ] 構造体のフィールドを適切にプライベートにする ([C-STRUCT-PRIVATE])
+  - [ ] newtypeを用いて実装詳細を隠蔽している ([C-NEWTYPE-HIDE])
+  - [ ] データ構造にderiveしたトレイトの境界を定義で繰り返さない ([C-STRUCT-BOUNDS])
+- **必要事項** *(ある状況下では重要な問題)*
+  - [ ] stableなクレートのパブリックな依存クレートがstableである ([C-STABLE])
+  - [ ] クレートとその依存先がpermissiveなライセンスの下にある ([C-PERMISSIVE])
 
 
 [C-CASE]: naming.html#c-case
